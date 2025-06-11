@@ -66,16 +66,6 @@ Use PlatformIO or Arduino IDE to build firmware from the respective `firmware` d
 
 ---
 
-## 📚 詳細ドキュメント / Documentation
-
-- [docs/system-architecture.md](docs/system-architecture.md)
-- [docs/api-spec.md](docs/api-spec.md)
-- [docs/db-schema.md](docs/db-schema.md)
-- [docs/dev-guide.md](docs/dev-guide.md)
-- [docs/test-plan.md](docs/test-plan.md)
-
----
-
 ## 📝 ライセンス / License
 
 このリポジトリは MIT ライセンスの下で公開されています。  
