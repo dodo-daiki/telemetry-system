@@ -1,0 +1,84 @@
+# Global
+
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+*.log
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# STM32 / PlatformIO / CubeIDE
+*.elf
+*.bin
+*.hex
+*.map
+*.lst
+*.d
+*.o
+*.axf
+*.log
+*.dep
+*.srec
+*.list
+*.launch
+*.uvoptx
+*.uvgui.*
+*.suo
+*.idb
+*.pdb
+*.ilk
+*.iobj
+*.ipdb
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# STM32 - PlatformIO build
+.pio/
+build/
+platformio.ini.save
+
+# ESP32 - PlatformIO / Arduino
+.pio/
+build/
+lib_deps/
+
+# VSCode settings (optional, safe to ignore)
+.vscode/
+
+# Frontend
+node_modules/
+dist/
+build/
+
+# Misc
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.rar
+
+# Backup files
+*~
+*.bak
+*.tmp
+*.swp
+
+# Environment variables / secrets
+.env
+.env.local
+.env.production
+.env.development
+.env.test
