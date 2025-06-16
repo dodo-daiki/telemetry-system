@@ -12,6 +12,8 @@ __pycache__/
 *.db
 *.log
 
+.vnev/
+
 # Node
 node_modules/
 npm-debug.log
