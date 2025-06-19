@@ -32,3 +32,6 @@ def create_uplink_command(db: Session, command_data: schemas.UplinkCommandCreate
     db.commit()
     db.refresh(db_command)
     return db_command
+
+def get_all_uplink_commands(db: Session):
+    return db.query(models.UplinkCommand).order_by(models.UplinkCommand.created_at.desc()).all()
