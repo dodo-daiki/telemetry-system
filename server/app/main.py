@@ -2,6 +2,8 @@ from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 from app import models, database
 from app.api import downlink, telemetry_log_json
+from app.api import telemetry_log_kml
+
 
 # アプリケーションインスタンス（← これが最初に必要！）
 app = FastAPI(
@@ -23,6 +25,7 @@ def get_db():
 # APIルーターの登録
 app.include_router(downlink.router, prefix="/api")
 app.include_router(telemetry_log_json.router, prefix="/api")
+app.include_router(telemetry_log_kml.router, prefix="/api")
 
 # 動作確認用のルート
 @app.get("/")
