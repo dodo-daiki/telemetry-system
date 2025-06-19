@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from app import models, database
 from app.api import downlink, telemetry_log_json
 from app.api import telemetry_log_kml
+from app.api import telemetry_log_csv
 
 
 # アプリケーションインスタンス（← これが最初に必要！）
@@ -26,6 +27,8 @@ def get_db():
 app.include_router(downlink.router, prefix="/api")
 app.include_router(telemetry_log_json.router, prefix="/api")
 app.include_router(telemetry_log_kml.router, prefix="/api")
+app.include_router(telemetry_log_csv.router, prefix="/api")
+
 
 # 動作確認用のルート
 @app.get("/")
