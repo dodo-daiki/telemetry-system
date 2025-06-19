@@ -25,3 +25,13 @@ def create_telemetry_log(db: Session, data: schemas.DownlinkData):
 
 def get_all_telemetry_logs(db: Session, limit: int = 100):
     return db.query(models.TelemetryLog).order_by(models.TelemetryLog.timestamp.desc()).limit(limit).all()
+
+def create_uplink_command(db: Session, command_data: schemas.UplinkCommandCreate):
+    db_command = models.UplinkCommand(**command_data.dict())
+    db.add(db_command)
+    db.commit()
+    db.refresh(db_command)
+    return db_command
+
+def get_all_uplink_commands(db: Session):
+    return db.query(models.UplinkCommand).order_by(models.UplinkCommand.created_at.desc()).all()
