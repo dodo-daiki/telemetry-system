@@ -22,3 +22,6 @@ def create_telemetry_log(db: Session, data: schemas.DownlinkData):
     db.commit()
     db.refresh(db_entry)
     return db_entry
+
+def get_all_telemetry_logs(db: Session, limit: int = 100):
+    return db.query(models.TelemetryLog).order_by(models.TelemetryLog.timestamp.desc()).limit(limit).all()
