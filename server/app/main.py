@@ -8,7 +8,6 @@ from app.api import uplink_command
 from app.api import uplink_log
 from app.api import websocket_endpoint
 
-
 # アプリケーションインスタンス（← これが最初に必要！）
 app = FastAPI(
     title="Telemetry Server",
