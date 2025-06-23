@@ -1,4 +1,3 @@
-// App.tsx（更新版）
 import { useEffect, useState } from "react";
 import RealtimeMap from "./components/RealtimeMap";
 
