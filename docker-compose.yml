@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  backend:
+    build: ./backend
+    container_name: telemetry-backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend/app:/app/app
+    depends_on:
+      - frontend
+    networks:
+      - telemetry-net
+
+  frontend:
+    build: ./frontend
+    container_name: telemetry-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+    networks:
+      - telemetry-net
+
+networks:
+  telemetry-net:
+    driver: bridge

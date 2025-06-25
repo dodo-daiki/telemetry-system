@@ -1,24 +1,30 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from app import schemas, crud, database, models
+from app import crud, schemas, database
+from app.api.websocket_endpoint import manager  # WebSocket管理インスタンスのimport
+
+import json
 
 router = APIRouter()
 
-# DBセッション依存性
-def get_db():
-    db = database.SessionLocal()
+@router.post("/downlink_data")
+async def create_telemetry_data(
+    payload: schemas.TelemetryLogCreate,
+    db: Session = Depends(database.get_db)
+):
     try:
-        yield db
-    finally:
-        db.close()
+        # DBへの保存
+        crud.create_telemetry_log(db=db, data=payload)
 
-@router.post("/downlink_data", response_model=schemas.TelemetryLogResponse)
-def post_downlink_data(data: schemas.DownlinkData, db: Session = Depends(get_db)):
-    try:
-        existing = db.query(models.TelemetryLog).filter_by(timestamp=data.timestamp).first()
-        if existing:
-            raise HTTPException(status_code=409, detail="Duplicate telemetry data with same timestamp.")
-        entry = crud.create_telemetry_log(db, data)
-        return entry  # ← FastAPIが自動的に Pydantic モデルに変換
+        # WebSocketに送信（例外処理あり）
+        try:
+            await manager.broadcast(json.dumps({
+                "type": "downlink",
+                "data": payload.dict()
+            }))
+        except Exception as e:
+            print(f"WebSocket broadcast failed: {e}")
+
+        return {"status": "success", "message": "Telemetry data received and broadcasted."}
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Failed to store telemetry: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to store telemetry: {e}")
