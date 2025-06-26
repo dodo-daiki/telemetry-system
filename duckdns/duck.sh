@@ -2,7 +2,7 @@
 
 echo "Starting DuckDNS updater"
 while true; do
-  curl -k "https://www.duckdns.org/update?domains=${DOMAIN}&token=${TOKEN}&ip="
-  echo "$(date): updated" >> /var/log/duckdns.log
+  RESPONSE=$(curl -ks "https://www.duckdns.org/update?domains=${DOMAIN}&token=${TOKEN}&ip=")
+  echo "$(date): update response = $RESPONSE" >> /var/log/duckdns.log
   sleep 300
 done
