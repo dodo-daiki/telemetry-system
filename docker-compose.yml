@@ -1,6 +1,14 @@
-version: "3.8"
+version: "3.9"
 
 services:
+  duckdns:
+    build: ./duckdns
+    container_name: duckdns-updater
+    restart: always
+    environment:
+      - DOMAIN=${DUCKDNS_DOMAIN}
+      - TOKEN=${DUCKDNS_TOKEN}
+
   backend:
     build: ./backend
     container_name: telemetry-backend
@@ -13,7 +21,7 @@ services:
       - telemetry-net
 
   frontend:
-    container_name: telemetry-frontend
+    container_name: "telemetry-frontend"
     build:
       context: ./frontend
       dockerfile: Dockerfile
